@@ -1,0 +1,107 @@
+[gd_scene load_steps=16 format=3 uid="uid://cg5adbslqjd7x"]
+
+[ext_resource type="Script" path="res://src/test/Test/World3D.gd" id="1_ov8v0"]
+[ext_resource type="Script" path="res://src/test/Test/MainCamera.gd" id="2_7eodk"]
+[ext_resource type="PackedScene" uid="uid://6kkohv0rlog1" path="res://assets/model/arm/arm.glb" id="3_exk2u"]
+[ext_resource type="PackedScene" uid="uid://hlopu6hpg8ow" path="res://assets/model/camera_shield/camera_shield.glb" id="3_heufb"]
+[ext_resource type="Script" path="res://src/test/Test/World3DDrawer.gd" id="3_lycyu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fetcl"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_nah25"]
+
+[sub_resource type="Sky" id="Sky_eq227"]
+sky_material = SubResource("PhysicalSkyMaterial_nah25")
+
+[sub_resource type="Environment" id="Environment_bjkch"]
+background_mode = 2
+sky = SubResource("Sky_eq227")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_784ej"]
+albedo_color = Color(0.345098, 0.345098, 0.345098, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_055of"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_14mjy"]
+transparency = 1
+albedo_color = Color(0.368627, 0.827451, 0.988235, 0.105882)
+emission_enabled = true
+emission = Color(0.870588, 0.870588, 0.870588, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5sags"]
+top_radius = 0.0
+bottom_radius = 0.05
+height = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a37kp"]
+top_radius = 0.0
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rd4jp"]
+
+[node name="World3D" type="Node3D"]
+script = ExtResource("1_ov8v0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_fetcl")
+skeleton = NodePath("../..")
+
+[node name="MainCamera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.714473, -0.338135, 0.61253, 0, 0.875465, 0.483282, -0.699663, -0.345292, 0.625495, 0.492, 0.353, 0.077)
+current = true
+fov = 44.0
+script = ExtResource("2_7eodk")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+unique_name_in_owner = true
+environment = SubResource("Environment_bjkch")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
+shadow_enabled = true
+
+[node name="arm" parent="." instance=ExtResource("3_exk2u")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0.476441, 0, -3.43255e-08)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_784ej")
+mesh = SubResource("PlaneMesh_055of")
+
+[node name="OriginMeshCamera" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.128356, 0)
+
+[node name="WorldObjects" type="Node3D" parent="OriginMeshCamera"]
+unique_name_in_owner = true
+
+[node name="CameraShield" parent="OriginMeshCamera" instance=ExtResource("3_heufb")]
+unique_name_in_owner = true
+transform = Transform3D(0.125, 0.216506, -0.433013, 0.433013, -0.25, -7.45058e-09, -0.216506, -0.375, -0.25, 0, 0.104228, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="OriginMeshCamera/CameraShield"]
+transform = Transform3D(2, -5.96046e-08, -4.47035e-08, 5.96046e-08, -2, 2.38419e-07, -2.98023e-08, -2.38419e-07, -2, 1.49012e-08, 0.0863125, 1.12759e-08)
+material_override = SubResource("StandardMaterial3D_14mjy")
+mesh = SubResource("CylinderMesh_5sags")
+
+[node name="FakeCamera" type="Camera3D" parent="OriginMeshCamera/CameraShield"]
+unique_name_in_owner = true
+transform = Transform3D(-1.45704e-08, 0.333333, -1.45704e-08, 0, -1.45704e-08, -0.333333, -0.333333, -1.45704e-08, 6.36895e-16, 0, 0, 0)
+fov = 44.0
+
+[node name="MeshInstanceCamera" type="MeshInstance3D" parent="OriginMeshCamera"]
+unique_name_in_owner = true
+transform = Transform3D(0.15, 0, 0, 0, -6.55671e-09, -0.15, 0, 0.15, -6.55671e-09, 0, 0, 0)
+visible = false
+mesh = SubResource("CylinderMesh_a37kp")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_rd4jp")
+
+[node name="World3DDrawer" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_lycyu")
+
+[connection signal="moved" from="MainCamera" to="." method="_on_main_camera_moved"]

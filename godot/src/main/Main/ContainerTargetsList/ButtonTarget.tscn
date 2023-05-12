@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://5fiuxr5nclsq"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_ixhkm"]
+
+[node name="ButtonTarget" type="CheckBox"]
+custom_minimum_size = Vector2(0, 40)
+button_group = SubResource("ButtonGroup_ixhkm")
+text = "123123"

@@ -1,0 +1,41 @@
+{
+	"folders": [
+		{
+			"name": "RT-Thread MicroPython",
+			"path": "."
+		}
+	],
+	"settings": {
+		"MicroPython.executeButton": [
+			{
+				"text": "▶",
+				"tooltip": "运行",
+				"alignment": "left",
+				"command": "extension.executeFile",
+				"priority": 3.5
+			}
+		],
+		"MicroPython.syncButton": [
+			{
+				"text": "$(sync)",
+				"tooltip": "同步",
+				"alignment": "left",
+				"command": "extension.execute",
+				"priority": 4
+			}
+		],
+		"files.associations": {
+			".mpyproject.json": "jsonc"
+		},
+		"python.autoComplete.extraPaths": [
+			"c:/Users/dingn/.vscode/extensions/rt-thread.rt-thread-micropython-1.0.10/microExamples/code-completion"
+		],
+		"python.linting.pylintArgs": [
+			"--init-hook",
+			"import sys; sys.path.append('c:/Users/dingn/.vscode/extensions/rt-thread.rt-thread-micropython-1.0.10/microExamples/code-completion')"
+		],
+		"python.analysis.extraPaths": [
+			"c:/Users/dingn/.vscode/extensions/rt-thread.rt-thread-micropython-1.0.10/microExamples/code-completion"
+		]
+	}
+}

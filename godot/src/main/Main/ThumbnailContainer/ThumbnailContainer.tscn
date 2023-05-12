@@ -1,0 +1,118 @@
+[gd_scene load_steps=6 format=3 uid="uid://8mpmub07jmff"]
+
+[ext_resource type="Script" path="res://src/main/Main/ThumbnailContainer/ThumbnailContainer.gd" id="1_1hwnj"]
+[ext_resource type="Texture2D" uid="uid://cqthukltsko4y" path="res://icon.svg" id="1_gqno6"]
+[ext_resource type="Texture2D" uid="uid://baff1h2w40sui" path="res://assets/art/icon/universal/backward.png" id="2_epxrk"]
+[ext_resource type="Texture2D" uid="uid://bw4nqvlmot6r8" path="res://assets/art/icon/universal/larger.png" id="3_8oc48"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwnma"]
+bg_color = Color(0.270222, 0.270222, 0.270222, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.172549, 0.172549, 0.172549, 1)
+
+[node name="ThumbnailContainer" type="MarginContainer"]
+offset_top = 449.0
+offset_right = 346.0
+offset_bottom = 648.0
+grow_vertical = 0
+script = ExtResource("1_1hwnj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gwnma")
+
+[node name="ThumbnailContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="HBoxContainer/MarginContainer/ThumbnailContainer"]
+layout_mode = 2
+theme_override_constants/side_margin = 0
+theme_override_font_sizes/font_size = 22
+tab_alignment = 1
+
+[node name="颜色" type="MarginContainer" parent="HBoxContainer/MarginContainer/ThumbnailContainer/TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ThumbnailColor" type="TextureRect" parent="HBoxContainer/MarginContainer/ThumbnailContainer/TabContainer/颜色"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(336, 189)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("1_gqno6")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="原始深度" type="MarginContainer" parent="HBoxContainer/MarginContainer/ThumbnailContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ThumbnailSimDepth" type="TextureRect" parent="HBoxContainer/MarginContainer/ThumbnailContainer/TabContainer/原始深度"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(336, 189)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("1_gqno6")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="修复深度" type="MarginContainer" parent="HBoxContainer/MarginContainer/ThumbnailContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ThumbnailSynDepth" type="TextureRect" parent="HBoxContainer/MarginContainer/ThumbnailContainer/TabContainer/修复深度"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(336, 189)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("1_gqno6")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonExpand" type="Button" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+icon = ExtResource("3_8oc48")
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonShow" type="Button" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("2_epxrk")
+expand_icon = true
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ButtonShow" to="." method="_on_button_show_pressed"]

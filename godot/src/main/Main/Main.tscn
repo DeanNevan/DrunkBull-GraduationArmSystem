@@ -1,0 +1,414 @@
+[gd_scene load_steps=12 format=3 uid="uid://brc5y8xlw2uf5"]
+
+[ext_resource type="Script" path="res://src/main/Main/Main.gd" id="1_apuf1"]
+[ext_resource type="PackedScene" uid="uid://dx0e7glcyh8oi" path="res://src/main/Main/ClientOnlineStatus/ClientOnlineStatus.tscn" id="2_snics"]
+[ext_resource type="PackedScene" uid="uid://clbhgy8c1pikm" path="res://src/test/Test/Draw2DBBox.tscn" id="2_t3i26"]
+[ext_resource type="PackedScene" uid="uid://c5utw3xw3ovu" path="res://src/test/Test/Draw6D.tscn" id="3_jb6ix"]
+[ext_resource type="PackedScene" uid="uid://cg5adbslqjd7x" path="res://src/test/Test/World3D.tscn" id="4_j2n1h"]
+[ext_resource type="Texture2D" uid="uid://blg73i1xsr8xa" path="res://assets/art/icon/universal/joystickUp.png" id="6_caqqe"]
+[ext_resource type="PackedScene" uid="uid://d3q8tajagkfou" path="res://src/main/Main/ContainerTargetsList/ContainerTargetsList.tscn" id="6_hcotg"]
+[ext_resource type="Texture2D" uid="uid://ckby5xh2evu5s" path="res://assets/art/icon/universal/return.png" id="6_xxur1"]
+[ext_resource type="Texture2D" uid="uid://4ufsx53xeyp1" path="res://assets/art/icon/universal/target.png" id="7_44p7g"]
+[ext_resource type="PackedScene" uid="uid://8mpmub07jmff" path="res://src/main/Main/ThumbnailContainer/ThumbnailContainer.tscn" id="7_uilyh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kq6kx"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 0.439216)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.172549, 0.172549, 0.172549, 1)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_apuf1")
+
+[node name="LayerBG" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="LayerBG"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.29219, 0.29219, 0.29219, 1)
+
+[node name="Draw2DBBox" parent="." instance=ExtResource("2_t3i26")]
+unique_name_in_owner = true
+
+[node name="Draw6D" parent="." instance=ExtResource("3_jb6ix")]
+unique_name_in_owner = true
+
+[node name="World3D" parent="." instance=ExtResource("4_j2n1h")]
+unique_name_in_owner = true
+
+[node name="Node" type="Node" parent="."]
+
+[node name="LayerUI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="ClientOnlineStatus" parent="LayerUI" instance=ExtResource("2_snics")]
+unique_name_in_owner = true
+
+[node name="MarginContainer" type="MarginContainer" parent="LayerUI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -172.0
+offset_bottom = 41.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ButtonViewType" type="OptionButton" parent="LayerUI/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 4
+popup/item_0/text = "无"
+popup/item_0/id = 0
+popup/item_1/text = "绘制2D Box"
+popup/item_1/id = 1
+popup/item_2/text = "绘制3D 位姿Box"
+popup/item_2/id = 2
+popup/item_3/text = "3D空间"
+popup/item_3/id = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="LayerUI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -167.0
+offset_top = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LayerUI/MarginContainer2"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kq6kx")
+
+[node name="MarginContainer" type="MarginContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ContainerControlArmRaw" type="VBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ContainerRawArmDegControl" type="VBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer"]
+layout_mode = 2
+text = "1"
+vertical_alignment = 1
+
+[node name="HSliderRaw1" type="HSlider" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 180.0
+
+[node name="LabelRaw1" type="Label" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "123"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer2"]
+layout_mode = 2
+text = "2"
+vertical_alignment = 1
+
+[node name="HSliderRaw2" type="HSlider" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 180.0
+
+[node name="LabelRaw2" type="Label" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "123"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer3"]
+layout_mode = 2
+text = "3"
+vertical_alignment = 1
+
+[node name="HSliderRaw3" type="HSlider" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 180.0
+
+[node name="LabelRaw3" type="Label" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "123"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer4"]
+layout_mode = 2
+text = "4"
+vertical_alignment = 1
+
+[node name="HSliderRaw4" type="HSlider" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 180.0
+
+[node name="LabelRaw4" type="Label" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer4"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "123"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer5"]
+layout_mode = 2
+text = "5"
+vertical_alignment = 1
+
+[node name="HSliderRaw5" type="HSlider" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 180.0
+
+[node name="LabelRaw5" type="Label" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer5"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "123"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer6"]
+layout_mode = 2
+text = "6"
+vertical_alignment = 1
+
+[node name="HSliderRaw6" type="HSlider" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer6"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 180.0
+
+[node name="LabelRaw6" type="Label" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmDegControl/HBoxContainer6"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "123"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ContainerRawArmEnterPos" type="VBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmEnterPos"]
+layout_mode = 2
+
+[node name="EditArmTargetX" type="LineEdit" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmEnterPos/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "x"
+
+[node name="EditArmTargetY" type="LineEdit" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmEnterPos/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "y"
+
+[node name="EditArmTargetThi" type="LineEdit" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ContainerRawArmEnterPos/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "方向角"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw"]
+layout_mode = 2
+
+[node name="ButtonUpdateRawArmControl" type="Button" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "控制"
+icon = ExtResource("6_caqqe")
+expand_icon = true
+
+[node name="ButtonResetArm" type="Button" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "重置"
+icon = ExtResource("7_44p7g")
+expand_icon = true
+
+[node name="HSeparator2" type="HSeparator" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw"]
+layout_mode = 2
+
+[node name="ButtonRawArmControlInputPos" type="CheckButton" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "输入坐标模式"
+
+[node name="HSeparator" type="HSeparator" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw"]
+layout_mode = 2
+
+[node name="ButtonRawArmControl" type="CheckButton" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "机械臂原始控制"
+expand_icon = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="Panel" type="Panel" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kq6kx")
+
+[node name="MarginContainer" type="MarginContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="ContainerCatchTarget" type="MarginContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ContainerCatchTarget"]
+layout_mode = 2
+
+[node name="ContainerTargetsList" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ContainerCatchTarget/VBoxContainer" instance=ExtResource("6_hcotg")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ContainerTargetInfo" type="VBoxContainer" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ContainerCatchTarget/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ContainerCatchTarget/VBoxContainer/ContainerTargetInfo"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ContainerCatchTarget/VBoxContainer/ContainerTargetInfo"]
+layout_mode = 2
+text = "该目标相对机械臂位于："
+
+[node name="LabelTargetInfo" type="Label" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ContainerCatchTarget/VBoxContainer/ContainerTargetInfo"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "x：%.2f，y:%.2f，thi：%.2f"
+autowrap_mode = 3
+
+[node name="HSeparator2" type="HSeparator" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ContainerCatchTarget/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonConfirmCatchTarget" type="Button" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ContainerCatchTarget/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "确认抓取"
+
+[node name="ButtonOpenCatchTarget" type="CheckButton" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "抓取目标列表"
+expand_icon = true
+
+[node name="ButtonUpdateVision" type="Button" parent="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+text = "刷新视觉"
+icon = ExtResource("6_xxur1")
+expand_icon = true
+
+[node name="ThumbnailContainer" parent="LayerUI" instance=ExtResource("7_uilyh")]
+unique_name_in_owner = true
+
+[connection signal="item_selected" from="LayerUI/MarginContainer/ButtonViewType" to="." method="_on_button_view_type_item_selected"]
+[connection signal="pressed" from="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/HBoxContainer/ButtonUpdateRawArmControl" to="." method="_on_button_update_raw_arm_control_pressed"]
+[connection signal="pressed" from="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/HBoxContainer/ButtonResetArm" to="." method="_on_button_reset_arm_pressed"]
+[connection signal="toggled" from="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ContainerControlArmRaw/ButtonRawArmControlInputPos" to="." method="_on_button_raw_arm_control_input_pos_toggled"]
+[connection signal="toggled" from="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/ButtonRawArmControl" to="." method="_on_button_raw_arm_control_toggled"]
+[connection signal="target_selected" from="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ContainerCatchTarget/VBoxContainer/ContainerTargetsList" to="." method="_on_container_targets_list_target_selected"]
+[connection signal="unselected" from="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ContainerCatchTarget/VBoxContainer/ContainerTargetsList" to="." method="_on_container_targets_list_unselected"]
+[connection signal="pressed" from="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ContainerCatchTarget/VBoxContainer/ButtonConfirmCatchTarget" to="." method="_on_button_confirm_catch_target_pressed"]
+[connection signal="toggled" from="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/MarginContainer/VBoxContainer/ButtonOpenCatchTarget" to="." method="_on_button_open_catch_target_toggled"]
+[connection signal="pressed" from="LayerUI/MarginContainer2/HBoxContainer/VBoxContainer/ButtonUpdateVision" to="." method="_on_button_update_vision_pressed"]

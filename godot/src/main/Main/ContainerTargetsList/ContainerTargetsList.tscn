@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3q8tajagkfou"]
+
+[ext_resource type="Script" path="res://src/main/Main/ContainerTargetsList/ContainerTargetsList.gd" id="1_wtnfu"]
+
+[node name="ContainerTargetsList" type="VBoxContainer"]
+script = ExtResource("1_wtnfu")

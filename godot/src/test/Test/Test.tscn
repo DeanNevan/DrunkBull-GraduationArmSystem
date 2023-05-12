@@ -1,0 +1,119 @@
+[gd_scene load_steps=11 format=3 uid="uid://dh5sc5nxdmtrq"]
+
+[ext_resource type="Script" path="res://src/test/Test/Test.gd" id="1_ugwyt"]
+[ext_resource type="Texture2D" uid="uid://dnrv62xbyuvy2" path="res://src/test/Test/data/3/img_color.png" id="2_rf57q"]
+[ext_resource type="Texture2D" uid="uid://c70vweo3653w5" path="res://src/test/Test/data/3/img_depth.exr" id="3_6cads"]
+[ext_resource type="Texture2D" uid="uid://cvqo5s6j6v40n" path="res://src/test/Test/data/3/img_depth_restoration.exr" id="4_v6q20"]
+[ext_resource type="JSON" path="res://src/test/Test/data/3/result.json" id="5_htu45"]
+[ext_resource type="PackedScene" uid="uid://clbhgy8c1pikm" path="res://src/test/Test/Draw2DBBox.tscn" id="6_atuac"]
+[ext_resource type="PackedScene" path="res://src/test/Test/Draw6D.tscn" id="7_qube1"]
+[ext_resource type="PackedScene" uid="uid://ds2p5p8mskcl7" path="res://src/test/Test/World3D.tscn" id="8_54rpr"]
+[ext_resource type="Texture2D" uid="uid://cqthukltsko4y" path="res://icon.svg" id="10_wybnp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6skm"]
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+
+[node name="Test" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ugwyt")
+resource_rgb = ExtResource("2_rf57q")
+resource_sim_depth = ExtResource("3_6cads")
+resource_syn_depth = ExtResource("4_v6q20")
+resource_result_json = ExtResource("5_htu45")
+path_cad_model = "D:\\Project\\Universal\\Graduation\\DREDS-main\\CatePoseEstimation\\cad_model\\syn_train"
+
+[node name="Draw2DBBox" parent="." instance=ExtResource("6_atuac")]
+unique_name_in_owner = true
+
+[node name="Draw6D" parent="." instance=ExtResource("7_qube1")]
+unique_name_in_owner = true
+
+[node name="World3D" parent="." instance=ExtResource("8_54rpr")]
+unique_name_in_owner = true
+
+[node name="LayerUI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="LayerUI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -226.0
+offset_top = -78.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="LayerUI/MarginContainer2"]
+modulate = Color(1, 1, 1, 0.235294)
+layout_mode = 2
+text = "①左上角切换显示方式
+②按1、2、3、4切换左下角显示
+③3D空间按空格对齐相机
+④3D空间wasdqe移动+右键飞行"
+
+[node name="MarginContainer" type="MarginContainer" parent="LayerUI"]
+offset_right = 172.0
+offset_bottom = 41.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LayerUI/MarginContainer"]
+layout_mode = 2
+
+[node name="ButtonType" type="OptionButton" parent="LayerUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+item_count = 4
+popup/item_0/text = "无"
+popup/item_0/id = 0
+popup/item_1/text = "绘制2D Box"
+popup/item_1/id = 1
+popup/item_2/text = "绘制3D 位姿Box"
+popup/item_2/id = 2
+popup/item_3/text = "3D空间"
+popup/item_3/id = 3
+
+[node name="ThumbnailContainer" type="MarginContainer" parent="LayerUI"]
+unique_name_in_owner = true
+offset_top = 449.0
+offset_right = 346.0
+offset_bottom = 648.0
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="LayerUI/ThumbnailContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_i6skm")
+
+[node name="MarginContainer" type="MarginContainer" parent="LayerUI/ThumbnailContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Thumbnail" type="TextureRect" parent="LayerUI/ThumbnailContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(336, 189)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("10_wybnp")
+expand_mode = 2
+stretch_mode = 5
+
+[connection signal="item_selected" from="LayerUI/MarginContainer/VBoxContainer/ButtonType" to="." method="_on_button_type_item_selected"]

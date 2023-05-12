@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://iqejxffk53bx"]
+
+[ext_resource type="Script" path="res://src/main/autoload/HeartbeatManager.gd" id="1_esu0c"]
+
+[node name="HeartbeatManager" type="Node"]
+script = ExtResource("1_esu0c")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="TimerTimeout" type="Timer" parent="."]
+wait_time = 10.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="TimerTimeout" to="." method="_on_timer_timeout_timeout"]

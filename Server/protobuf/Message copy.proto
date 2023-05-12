@@ -1,0 +1,90 @@
+syntax = "proto2";
+
+enum ClinetType{
+    UNKNOWN = 0;
+    VISION = 1;
+    ARM = 2;
+    MONITOR = 3;
+}
+
+enum V_CMD {
+    V_UPDATE = 0;
+}
+
+enum M_CMD {
+    M_UPDATE_VISION = 0;
+    M_UPDATE_CLIENTS = 1;
+    M_CONTROL_ARM_RAW = 2;
+    M_CONTROL_ARM_TARGET = 3;
+}
+
+enum A_CMD {
+    A_CONTROL_RAW = 0;
+    A_CONTROL_TARGET = 1;
+}
+
+message CSMessage{
+    required ClinetType client_type = 1;
+    required bool heartbeat = 2;
+    optional CSVisionMessage cs_vision_message = 3;
+    optional CSArmMessage cs_arm_message = 4;
+    optional CSMonitorMessage cs_monitor_message = 5;
+}
+
+message SCMessage{
+    required ClinetType client_type = 1;
+    required bool heartbeat = 2;
+    optional SCVisionMessage sc_vision_message = 3;
+    optional SCArmMessage sc_arm_message = 4;
+    optional SCMonitorMessage sc_monitor_message = 5;
+}
+
+message CSVisionMessage{
+    required V_CMD cmd = 1;
+    optional bytes color_image = 2;
+    optional bytes depth_image = 3;
+}
+
+message CSArmMessage{
+    
+}
+
+message CSMonitorMessage{
+    required M_CMD cmd = 1;
+    optional int32 control_arm_raw_pos1 = 2;
+    optional int32 control_arm_raw_pos2 = 3;
+    optional int32 control_arm_raw_pos3 = 4;
+    optional int32 control_arm_raw_pos4 = 5;
+    optional int32 control_arm_raw_pos5 = 6;
+    optional int32 control_arm_raw_pos6 = 7;
+    optional float control_arm_target_x = 8;
+    optional float control_arm_target_y = 9;
+    optional float control_arm_target_r = 10;
+}
+
+message SCVisionMessage{
+    required V_CMD cmd = 1;
+}
+
+message SCArmMessage{
+    required A_CMD cmd = 1;
+    optional int32 control_arm_raw_pos1 = 2;
+    optional int32 control_arm_raw_pos2 = 3;
+    optional int32 control_arm_raw_pos3 = 4;
+    optional int32 control_arm_raw_pos4 = 5;
+    optional int32 control_arm_raw_pos5 = 6;
+    optional int32 control_arm_raw_pos6 = 7;
+    optional float control_arm_target_x = 8;
+    optional float control_arm_target_y = 9;
+    optional float control_arm_target_r = 10;
+}
+
+message SCMonitorMessage{
+    required M_CMD cmd = 1;
+    optional bytes color_image = 2;
+    optional bytes sim_depth_image = 3;
+    optional bytes syn_depth_image = 4;
+    optional string pred_result_json = 5;
+    optional bool client_arm_online = 6;
+    optional bool client_vision_online = 7;
+}

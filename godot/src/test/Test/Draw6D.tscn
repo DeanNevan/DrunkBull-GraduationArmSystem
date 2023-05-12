@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5utw3xw3ovu"]
+
+[ext_resource type="Script" path="res://src/test/Test/Draw6D.gd" id="1_fdabk"]
+[ext_resource type="Texture2D" uid="uid://d4gq8b564il2d" path="res://src/test/Test/data/1/0000_color.png" id="2_3w3nh"]
+[ext_resource type="Script" path="res://src/test/Test/Drawer6D.gd" id="3_x4ics"]
+
+[node name="Draw6D" type="Node"]
+script = ExtResource("1_fdabk")
+
+[node name="RGB" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_3w3nh")
+expand_mode = 2
+
+[node name="Drawer6D" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_x4ics")
