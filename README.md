@@ -2,7 +2,7 @@
  毕设-基于远程监控机械臂的透明物体检测抓取
 
 ## 说明
-- 包含**服务端（Server）、视觉（Vision）、机械臂（MCU）、图形界面（godot）** 四个项目
+- 包含**服务端（命名为Server）、视觉（命名为Vision）、机械臂（命名为MCU）、图形界面（命名为godot）** 四个项目
 - **服务端**：需求python3.7，详细配置参考[DREDS](https://github.com/PKU-EPIC/DREDS/tree/main/CatePoseEstimation)
 - **视觉**：为ROS的节点，ros run xxx ClientVision即可，需要奥比中光在ROS平台的SDK
 - **机械臂**：为MicroPython项目，基于ESP32，需要将其中必要文件用ampy上传至单片机，运行main.py即可
