@@ -14,6 +14,11 @@
 - 在Server\depth_restoration\model中需要名为model.pth的模型文件，来源于 [DREDS](https://github.com/PKU-EPIC/DREDS/tree/main/CatePoseEstimation) 作者提供的 [下载链接](https://mirrors.pku.edu.cn/dl-release/DREDS_ECCV2022/checkpoint/SwinDRNet/models/model.pth)
 
 ## 演示
+
+- **工作流程与技术说明**
+
+![工作流程与技术说明](demo/overall.png)
+
 - **抓取演示**：
 
 ![抓取演示](demo/1.png)
